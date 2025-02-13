@@ -166,3 +166,126 @@ It is a non-blocking event loop, which means that it can handle multiple tasks a
   4. The Event Loop.
 
 ![JS Runtime in Node.js](./Pics/3.%20JS%20run%20Time%20In%20NodeJs.png)
+
+---
+
+# Execution Context and The Call Stack (Lecture 3)
+
+## How JavaScript code is executed?
+
+- creation of the `Global Execution Context` and the `Global Object` (window object in the browser).
+- Global execution context is created when the JavaScript engine starts executing the code.
+- The global execution context is the first execution context that is created when the JavaScript engine starts executing the code.
+- it's made for the global code (for top-level code , the code not inside any function) that is not inside any function.
+
+## What is the Execution Context:
+
+- Environment in which a piece of JavaScript is executed.
+
+- Stores all the necessary information for the code to be executed
+
+### Exactly one global execution context (EC) is created when the script is loaded
+
+- Default EC for the code that is not inside any function (top-level code)
+
+### One Execution Context is created for each function call
+
+- Each function has its own execution context
+
+- For Each function call, a new execution context is created and added to the top of the call stack.
+
+- When the function returns, its execution context is removed from the call stack.
+
+![Execution Context](./Pics/4.%20Execution%20Context.png)
+
+---
+
+## What is inside the Execution Context:
+
+1. Variable Environment (VE)
+
+   - let, const, var, function declarations
+   - variables
+   - function arguments
+   - arguments object
+
+2. Scope Chain
+3. `this` keyword
+
+- All of these are created during the "creation phase" of the execution context, which is happening before the Execution.
+
+### Note about Arrow Functions:
+
+- Arrow functions do not have their own `this` keyword, they use the `this` keyword of their parent scope.
+
+- Arrow functions do not have their own `arguments` object, they use the `arguments` object of their parent scope.
+
+![What is inside the Execution Context](./Pics/5.%20inside%20Execution%20Context.png)
+
+## Simulate The Creation Phase:
+
+- The creation phase is the phase in which the execution context is created and the necessary information is stored in the execution context.
+
+- The creation phase consists of the following steps:
+
+  1. Creation of the Variable Environment (VE).
+  2. Creation of the Scope Chain.
+  3. Determination of the value of the `this` keyword.
+
+- The creation phase is happening before the execution of the code.
+
+![Simulate The Creation Phase](./Pics/6.%20Simulate%20Execution%20Context.png)
+
+---
+
+## The Call Stack:
+
+- The call stack is a data structure that stores information about the active function calls in a program.
+
+- The call stack is a last-in, first-out (LIFO) data structure.
+
+- The call stack is used to keep track of the active function calls in a program.
+
+- When a function is called, its execution context is added to the top of the call stack.
+
+- The Function that is at the top of the call stack is the one that is currently being executed.
+
+- When a function returns, its execution context is removed from the top of the call stack.
+
+### How would the Engine Know which function was being executed before the current function?
+
+- The engine keeps track of the execution context of the function that called the current function.
+
+- This is done by using the `Scope Chain`.
+
+- The `Scope Chain` is a chain of execution contexts that are created when a function is called.
+
+- The `Scope Chain` is used to keep track of the parent function of the current function.
+
+- The `Scope Chain` is used to determine the value of the `this` keyword.
+
+- The order of the execution never get lost because of the `Scope Chain`.
+
+## ![How the Call Stack Works](./Pics/7.%20How%20CAll%20Stack%20Work.png)
+
+### Explain The Pic :
+
+- The `Global Execution Context` is created when the JavaScript engine starts executing the code.
+
+- The `Global Execution Context` is added to the top of the call stack.
+
+- The `Global Execution Context` is the first execution context that is created when the JavaScript engine starts executing the code.
+
+- When a function is called, its execution context is added to the top of the call stack.
+
+- The function that is at the top of the call stack is the one that is currently being executed.
+
+- When a function returns, its execution context is removed from the top of the call stack.
+
+- The function that was called before the current function is added to the top of the call stack.
+
+- The `Scope Chain` is used to keep track of the parent function of the current function.
+
+- The `Scope Chain` is used to determine the value of the `this` keyword.
+
+---
